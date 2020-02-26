@@ -20,6 +20,7 @@ class Application extends StatelessWidget {
       // Start the app with the "/" named route. In this case, the app starts
       // on the FirstScreen widget.
       initialRoute: LoginPageRoute,
+      theme: ThemeData.dark(),
       routes: {
         HomePageRoute: (context) => HomePage(),
         LoginPageRoute: (context) => LoginPage(),

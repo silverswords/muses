@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Workspace extends StatelessWidget {
+class WorkspaceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
