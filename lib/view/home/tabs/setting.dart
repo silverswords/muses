@@ -4,7 +4,7 @@ class SettingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Setting'),
+      child: HtmlElementView(viewType: 'markdown-view'),
     );
   }
 }
