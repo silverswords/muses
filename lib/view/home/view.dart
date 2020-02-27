@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import './widget/tab_bar.dart';
+import './widget/tab_item.dart';
+
 import './tabs/workspace.dart';
 import './tabs/setting.dart';
 
@@ -51,11 +54,9 @@ class _HomePageState extends State<HomePage>
               // Rotate the tab bar, so the animation is vertical for desktops.
               RotatedBox(
                 quarterTurns: verticalRotation,
-                child: _RallyTabBar(
-                  tabs: _buildTabs(
-                          context: context, theme: theme, isVertical: true)
-                      .map(
-                    (widget) {
+                child: VerticalTabBar(
+                  tabs: _buildTabs(context: context, theme: theme, isVertical: true)
+                      .map((widget) {
                       // Revert the rotation on the tabs.
                       return RotatedBox(
                         quarterTurns: revertVerticalRotation,
@@ -109,19 +110,21 @@ class _HomePageState extends State<HomePage>
   List<Widget> _buildTabs(
       {BuildContext context, ThemeData theme, bool isVertical = false}) {
     return [
-      _RallyTab(
+      TabItem(
         theme: theme,
-        iconData: Icons.pie_chart,
-        title: 'Workspace',
-        tabIndex: 0,
+        iconData: Icons.settings,
+        title: 'Setting',
+        tabIndex: 1,
+        tabCount: tabCount,
         tabController: _tabController,
         isVertical: isVertical,
       ),
-      _RallyTab(
+      TabItem(
         theme: theme,
-        iconData: Icons.attach_money,
-        title: 'Setting',
-        tabIndex: 1,
+        iconData: Icons.work,
+        title: 'Workspace',
+        tabIndex: 0,
+        tabCount: tabCount,
         tabController: _tabController,
         isVertical: isVertical,
       ),
@@ -133,151 +136,5 @@ class _HomePageState extends State<HomePage>
       WorkspaceView(),
       SettingView(),
     ];
-  }
-}
-
-class _RallyTabBar extends StatelessWidget {
-  const _RallyTabBar({Key key, this.tabs, this.tabController})
-      : super(key: key);
-
-  final List<Widget> tabs;
-  final TabController tabController;
-
-  @override
-  Widget build(BuildContext context) {
-    return TabBar(
-      // Setting isScrollable to true prevents the tabs from being
-      // wrapped in [Expanded] widgets, which allows for more
-      // flexible sizes and size animations among tabs.
-      isScrollable: true,
-      labelPadding: EdgeInsets.zero,
-      tabs: tabs,
-      controller: tabController,
-      // This hides the tab indicator.
-      indicatorColor: Colors.transparent,
-    );
-  }
-}
-
-class _RallyTab extends StatefulWidget {
-  _RallyTab({
-    ThemeData theme,
-    IconData iconData,
-    String title,
-    int tabIndex,
-    TabController tabController,
-    this.isVertical,
-  })  : titleText = Text(title, style: theme.textTheme.button),
-        isExpanded = tabController.index == tabIndex,
-        icon = Icon(iconData, semanticLabel: title);
-
-  final Text titleText;
-  final Icon icon;
-  final bool isExpanded;
-  final bool isVertical;
-
-  @override
-  _RallyTabState createState() => _RallyTabState();
-}
-
-class _RallyTabState extends State<_RallyTab>
-    with SingleTickerProviderStateMixin {
-  Animation<double> _titleSizeAnimation;
-  Animation<double> _titleFadeAnimation;
-  Animation<double> _iconFadeAnimation;
-  AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
-      vsync: this,
-    );
-    _titleSizeAnimation = _controller.view;
-    _titleFadeAnimation = _controller.drive(CurveTween(curve: Curves.easeOut));
-    _iconFadeAnimation = _controller.drive(Tween<double>(begin: 0.6, end: 1));
-    if (widget.isExpanded) {
-      _controller.value = 1;
-    }
-  }
-
-  @override
-  void didUpdateWidget(_RallyTab oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.isExpanded) {
-      _controller.forward();
-    } else {
-      _controller.reverse();
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (widget.isVertical) {
-      return Column(
-        children: [
-          const SizedBox(height: 18),
-          FadeTransition(
-            child: widget.icon,
-            opacity: _iconFadeAnimation,
-          ),
-          const SizedBox(height: 12),
-          FadeTransition(
-            child: SizeTransition(
-              child: Center(child: ExcludeSemantics(child: widget.titleText)),
-              axis: Axis.vertical,
-              axisAlignment: -1,
-              sizeFactor: _titleSizeAnimation,
-            ),
-            opacity: _titleFadeAnimation,
-          ),
-          const SizedBox(height: 18),
-        ],
-      );
-    }
-
-    // Calculate the width of each unexpanded tab by counting the number of
-    // units and dividing it into the screen width. Each unexpanded tab is 1
-    // unit, and there is always 1 expanded tab which is 1 unit + any extra
-    // space determined by the multiplier.
-    final width = MediaQuery.of(context).size.width;
-    const expandedTitleWidthMultiplier = 2;
-    final unitWidth = width / (tabCount + expandedTitleWidthMultiplier);
-
-    return ConstrainedBox(
-      constraints: BoxConstraints(minHeight: 56),
-      child: Row(
-        children: [
-          FadeTransition(
-            child: SizedBox(
-              width: unitWidth,
-              child: widget.icon,
-            ),
-            opacity: _iconFadeAnimation,
-          ),
-          FadeTransition(
-            child: SizeTransition(
-              child: SizedBox(
-                width: unitWidth * expandedTitleWidthMultiplier,
-                child: Center(
-                  child: ExcludeSemantics(child: widget.titleText),
-                ),
-              ),
-              axis: Axis.horizontal,
-              axisAlignment: -1,
-              sizeFactor: _titleSizeAnimation,
-            ),
-            opacity: _titleFadeAnimation,
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }
