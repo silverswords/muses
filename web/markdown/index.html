@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Markdown Render">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="muses">
+  <link rel="apple-touch-icon" href="/icons/Icon-192.png">
+
+  <title>Markdown Render</title>
+  <script>
+    function init() {
+      const content = window.localStorage.getItem('markdown-view-content');
+
+      if (content) {
+        setContent(content);
+      }
+    }
+
+    function setContent(arg) {
+      const content = document.getElementById('content');
+      content.innerHTML = arg;
+    }
+  </script>
+</head>
+<body onload='init()'>
+  <p id='content'></p>
+</body>
+</html>
