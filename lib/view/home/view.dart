@@ -40,8 +40,8 @@ class _HomePageState extends State<HomePage>
     final ThemeData theme = Theme.of(context);
     Widget tabBarView;
 
-    final verticalRotation = turnsToRotateLeft;
-      final revertVerticalRotation = turnsToRotateRight;
+    final verticalRotation = turnsToRotateRight;
+      final revertVerticalRotation = turnsToRotateLeft;
     
     tabBarView = Row(
       children: [
@@ -112,18 +112,18 @@ class _HomePageState extends State<HomePage>
     return [
       TabItem(
         theme: theme,
-        iconData: Icons.settings,
-        title: 'Setting',
-        tabIndex: 1,
+        iconData: Icons.work,
+        title: 'Workspace',
+        tabIndex: 0,
         tabCount: tabCount,
         tabController: _tabController,
         isVertical: isVertical,
       ),
       TabItem(
         theme: theme,
-        iconData: Icons.work,
-        title: 'Workspace',
-        tabIndex: 0,
+        iconData: Icons.settings,
+        title: 'Setting',
+        tabIndex: 1,
         tabCount: tabCount,
         tabController: _tabController,
         isVertical: isVertical,
