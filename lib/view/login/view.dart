@@ -44,7 +44,7 @@ class _MainView extends StatelessWidget {
   final TextEditingController passwordController;
 
   void _login(BuildContext context) {
-    Navigator.pushNamed(context, HomePageRoute);
+    Navigator.pushNamed(context, RoomPageRoute);
   }
 
   @override
@@ -228,7 +228,7 @@ class _LoginButton extends StatelessWidget {
           children: [
             Icon(Icons.check_circle_outline, color: DefaultColors.buttonColor),
             const SizedBox(width: 12),
-            Text('RememberMe'),
+            Text('Teacher'),
             const Expanded(child: SizedBox.shrink()),
             _FilledButton(
               text: 'Login',

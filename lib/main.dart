@@ -5,6 +5,7 @@ import 'package:muses/locator.dart';
 import 'package:muses/registry.dart';
 import 'package:muses/routing/names.dart';
 import 'package:muses/view/login/view.dart';
+import 'package:muses/view/room/view.dart';
 import 'package:muses/view/home/view.dart';
 
 void main() {
@@ -24,8 +25,9 @@ class Application extends StatelessWidget {
       initialRoute: LoginPageRoute,
       theme: ThemeData.dark(),
       routes: {
-        HomePageRoute: (context) => HomePage(),
         LoginPageRoute: (context) => LoginPage(),
+        RoomPageRoute: (context) => RoomPage(),
+        HomePageRoute: (context) => HomePage(),
       },
     );
   }

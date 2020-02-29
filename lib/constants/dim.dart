@@ -1,0 +1,1 @@
+const double desktopDisplay1FontDelta = 16;
