@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:muses/routing/names.dart';
+import 'package:muses/widgets/helper/decoration.dart';
 
 class RoomPage extends StatelessWidget {
   @override
@@ -14,11 +15,7 @@ class RoomPage extends StatelessWidget {
             highlightColor: Colors.transparent,
           ),
           child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.red,
-              ),
-            ),
+            decoration: borderWithColor(Colors.red),
             child: InkWell(
               onTap: () {
                 Navigator.pushNamed(context, HomePageRoute);
@@ -31,9 +28,7 @@ class RoomPage extends StatelessWidget {
                     flex: 2,
                     child: Container(
                       color: Colors.orange,
-                      child: Center(
-                        child: Text('Rooms')
-                      ),
+                      child: buildRoomList(),
                     ),
                   ),
                   Expanded(
@@ -51,6 +46,20 @@ class RoomPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildRoomList() {
+    final entries = ['A', 'B'];
+    return ListView.builder(
+      padding: const EdgeInsets.all(8),
+      itemCount: entries.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          height: 50,
+          child: Center(child: Text('Room ${entries[index]}')),
+        );
+      }
     );
   }
 }
