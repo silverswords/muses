@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:muses/constants/colors.dart';
 import 'package:muses/routing/names.dart';
 
 import 'package:muses/widgets/input/single_line.dart';
@@ -36,6 +35,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
+enum LoginType { student, teacher }
+
 class _MainView extends StatelessWidget {
   const _MainView({
     Key key,
@@ -54,25 +55,86 @@ class _MainView extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> listViewChildren;
 
-    final desktopMaxWidth = 400.0 + 100.0;
+    final maxWidth = 500.0;
+
+    final loginChoice = Align(
+      alignment: Alignment.center,
+      child: Container(
+        constraints: BoxConstraints(
+          maxWidth: maxWidth
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Row(
+                  children: [
+                    Radio(
+                      value: LoginType.student,
+                      groupValue: LoginType.student,
+                      onChanged: (LoginType value) {
+                      },
+                    ),
+                    Text('Student')
+                  ],
+                ),
+                Row(
+                  children: [
+                    Radio(
+                      value: LoginType.teacher,
+                      groupValue: LoginType.student,
+                      onChanged: (LoginType value) {
+                      },
+                    ),
+                    Text('Teacher')
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              width: 12,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                FilledButton(
+                  text: 'Free Trail',
+                  icon: Icons.fingerprint,
+                  onTap: () {
+                    _login(context);
+                  },
+                ),
+                SizedBox(
+                  width: 18,
+                ),
+                FilledButton(
+                  text: 'Login',
+                  icon: Icons.security,
+                  onTap: () {
+                    _login(context);
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+    
+      
     listViewChildren = [
       SingleLineInput(
-        maxWidth: desktopMaxWidth,
+        maxWidth: maxWidth,
         label: 'Username',
         controller: usernameController,
       ),
       const SizedBox(height: 12),
       PasswordInput(
-        maxWidth: desktopMaxWidth,
+        maxWidth: maxWidth,
         label: 'Password',
         controller: passwordController,
       ),
-      _LoginButton(
-        maxWidth: desktopMaxWidth,
-        onTap: () {
-          _login(context);
-        },
-      ),
+      loginChoice,
     ];
 
     return Column(
@@ -88,41 +150,6 @@ class _MainView extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _LoginButton extends StatelessWidget {
-  const _LoginButton({
-    Key key,
-    @required this.onTap,
-    this.maxWidth,
-  }) : super(key: key);
-
-  final double maxWidth;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Container(
-        constraints: BoxConstraints(maxWidth: maxWidth ?? double.infinity),
-        padding: const EdgeInsets.symmetric(vertical: 30),
-        child: Row(
-          children: [
-            Icon(Icons.check_circle_outline, color: DefaultColors.buttonColor),
-            const SizedBox(width: 12),
-            Text('Teacher'),
-            const Expanded(child: SizedBox.shrink()),
-            FilledButton(
-              text: 'Login',
-              icon: Icons.lock,
-              onTap: onTap,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

@@ -20,15 +20,15 @@ class FilledButton extends StatelessWidget {
 
     if (icon != null) {
       widgets.add(Icon(icon));
-      widgets.add(SizedBox(width: 6));
+      widgets.add(SizedBox(width: 12));
     }
     widgets.add(Text(text));
 
     return FlatButton(
       color: color ?? Theme.of(context).buttonColor,
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(8),
       ),
       onPressed: onTap,
       child: Row(
