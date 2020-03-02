@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:muses/constants/colors.dart';
 import 'package:muses/routing/names.dart';
@@ -119,7 +118,6 @@ class _LoginButton extends StatelessWidget {
             FilledButton(
               text: 'Login',
               icon: Icons.lock,
-              color: DefaultColors.buttonColor,
               onTap: onTap,
             ),
           ],
