@@ -37,104 +37,41 @@ class _LoginPageState extends State<LoginPage> {
 
 enum LoginType { student, teacher }
 
-class _MainView extends StatelessWidget {
+class _MainView extends StatefulWidget {
   const _MainView({
     Key key,
     this.usernameController,
     this.passwordController,
   }) : super(key: key);
-
+  
   final TextEditingController usernameController;
   final TextEditingController passwordController;
 
-  void _login(BuildContext context) {
-    Navigator.pushNamed(context, RoomPageRoute);
-  }
+  @override
+  _MainViewState createState() => _MainViewState();
+}
+
+class _MainViewState extends State<_MainView> {
+  final maxWidth = 500.0;
+  LoginType _loginType = LoginType.student;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> listViewChildren;
-
-    final maxWidth = 500.0;
-
-    final loginChoice = Align(
-      alignment: Alignment.center,
-      child: Container(
-        constraints: BoxConstraints(
-          maxWidth: maxWidth
-        ),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Row(
-                  children: [
-                    Radio(
-                      value: LoginType.student,
-                      groupValue: LoginType.student,
-                      onChanged: (LoginType value) {
-                      },
-                    ),
-                    Text('Student')
-                  ],
-                ),
-                Row(
-                  children: [
-                    Radio(
-                      value: LoginType.teacher,
-                      groupValue: LoginType.student,
-                      onChanged: (LoginType value) {
-                      },
-                    ),
-                    Text('Teacher')
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 12,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                FilledButton(
-                  text: 'Free Trail',
-                  icon: Icons.fingerprint,
-                  onTap: () {
-                    _login(context);
-                  },
-                ),
-                SizedBox(
-                  width: 18,
-                ),
-                FilledButton(
-                  text: 'Login',
-                  icon: Icons.security,
-                  onTap: () {
-                    _login(context);
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-    
       
     listViewChildren = [
       SingleLineInput(
         maxWidth: maxWidth,
         label: 'Username',
-        controller: usernameController,
+        controller: widget.usernameController,
       ),
       const SizedBox(height: 12),
       PasswordInput(
         maxWidth: maxWidth,
         label: 'Password',
-        controller: passwordController,
+        controller: widget.passwordController,
       ),
-      loginChoice,
+      _loginSectionBuilder(context),
     ];
 
     return Column(
@@ -151,5 +88,103 @@ class _MainView extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Widget _loginSectionBuilder(BuildContext context) {
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+        constraints: BoxConstraints(
+          maxWidth: maxWidth
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Row(
+                  children: [
+                    Radio(
+                      value: LoginType.student,
+                      groupValue: _loginType,
+                      onChanged: (LoginType value) {
+                        setState(() {
+                          _loginType = value;
+                        });
+                      },
+                    ),
+                    Text('Student')
+                  ],
+                ),
+                Row(
+                  children: [
+                    Radio(
+                      value: LoginType.teacher,
+                      groupValue: _loginType,
+                      onChanged: (LoginType value) {
+                        setState(() {
+                          _loginType = value;
+                        });
+                      },
+                    ),
+                    Text('Teacher')
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              width: 12,
+            ),
+            _loginButtonsBuilder(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _loginButtonsBuilder(BuildContext context) {
+    var _widgets;
+
+    if (_loginType == LoginType.student) {
+      _widgets = [
+        FilledButton(
+          text: 'Free Trail',
+          icon: Icons.fingerprint,
+          onTap: () {
+            _login(context);
+          },
+        ),
+        SizedBox(
+          width: 18,
+        ),
+        FilledButton(
+          text: 'Login',
+          icon: Icons.security,
+          onTap: () {
+            _login(context);
+          },
+        ),
+      ];
+    }
+    
+    if (_loginType == LoginType.teacher) {
+      _widgets = [
+        FilledButton(
+          text: 'Login',
+          icon: Icons.security,
+          onTap: () {
+            _login(context);
+          },
+        ),
+      ];
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: _widgets,
+    );
+  }
+
+  void _login(BuildContext context) {
+    Navigator.pushNamed(context, RoomPageRoute);
   }
 }
