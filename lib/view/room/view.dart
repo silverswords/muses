@@ -50,7 +50,7 @@ class RoomPage extends StatelessWidget {
   }
 
   Widget buildRoomList() {
-    final entries = ['A', 'B'];
+    final entries = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
     return ListView.builder(
       padding: const EdgeInsets.all(8),
       itemCount: entries.length,
