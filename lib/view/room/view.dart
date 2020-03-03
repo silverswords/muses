@@ -3,7 +3,6 @@ import 'package:flutter/painting.dart';
 
 import 'package:muses/models/room.dart';
 import 'package:muses/routing/names.dart';
-import 'package:muses/widgets/helper/decoration.dart';
 
 class RoomPage extends StatelessWidget {
   @override
