@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:muses/models/room.dart';
 import 'package:muses/routing/names.dart';
 import 'package:muses/widgets/helper/decoration.dart';
 
@@ -15,7 +16,6 @@ class RoomPage extends StatelessWidget {
             highlightColor: Colors.transparent,
           ),
           child: Container(
-            decoration: borderWithColor(Colors.red),
             child: InkWell(
               onTap: () {
                 Navigator.pushNamed(context, HomePageRoute);
@@ -27,7 +27,6 @@ class RoomPage extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Container(
-                      color: Colors.orange,
                       child: buildRoomList(),
                     ),
                   ),
@@ -50,16 +49,86 @@ class RoomPage extends StatelessWidget {
   }
 
   Widget buildRoomList() {
-    final entries = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
+    final entries = [
+      Room(1000,
+        'Javascript 入门班',
+        '高阳',
+        'Control Flow',
+        '学习 if-else, for, while 基础知识',
+      ),
+      Room(1001,
+        'Flutter 入门班',
+        '保定',
+        'Control Flow',
+        '学习 if-else, for, while 基础知识',
+      ),
+    ];
     return ListView.builder(
       padding: const EdgeInsets.all(8),
       itemCount: entries.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          height: 50,
-          child: Center(child: Text('Room ${entries[index]}')),
+          margin: const EdgeInsets.symmetric(vertical: 6),
+          child: _roomCardBuilder(entries[index])
         );
       }
+    );
+  }
+
+  Card _roomCardBuilder(Room room) {
+    return Card(
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    room.name,
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.greenAccent,
+                    ),
+                  ),
+                ),
+                Text(
+                  room.location,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.yellowAccent,
+                  ),
+                )
+              ],
+            ),
+            SizedBox(height: 18),
+            Row(
+              children: [
+                Text(
+                  '当前讲授：${room.title}',
+                  style: TextStyle(
+                    fontSize: 16
+                  ),
+                ),
+              ]
+            ),
+            SizedBox(height: 6),
+            Row(
+              children: [
+                Text(
+                  room.desc,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
+                  maxLines: 3,
+                ),
+              ]
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
