@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 import 'package:muses/models/room.dart';
 import 'package:muses/routing/names.dart';
@@ -27,17 +28,12 @@ class RoomPage extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Container(
-                      child: buildRoomList(),
+                      child: _buildRoomList(),
                     ),
                   ),
                   Expanded(
                     flex: 3,
-                    child: Container(
-                      color: Colors.blueAccent,
-                      child: Center(
-                        child: Text('Schedule')
-                      ),
-                    )
+                    child: _buildSchedule(),
                   ),
                 ],
               ),
@@ -48,7 +44,7 @@ class RoomPage extends StatelessWidget {
     );
   }
 
-  Widget buildRoomList() {
+  Widget _buildRoomList() {
     final entries = [
       Room(1000,
         'Javascript 入门班',
@@ -127,6 +123,18 @@ class RoomPage extends StatelessWidget {
               ]
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSchedule() {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+      foregroundDecoration: const BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage('https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_1280.png'),
+          fit: BoxFit.fill,
         ),
       ),
     );
