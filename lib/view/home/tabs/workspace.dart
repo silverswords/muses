@@ -10,9 +10,7 @@ class WorkspaceView extends StatelessWidget {
           Container(
             height: 40,
             color: Colors.purple,
-            child: Center(
-              child: Text('状态栏/通知栏')
-            ),
+            child: _statusBarBuilder()
           ),
           Expanded(
             flex: 1,
@@ -25,38 +23,14 @@ class WorkspaceView extends StatelessWidget {
                     flex: 3,
                     child: Container(
                       color: Colors.grey,
-                      child: Center(
-                        child: Text('教学内容提纲/PPT')
-                      )
+                      child: _mainViewBuilder(),
                     ),
                   ),
                   Expanded(
                     flex: 1,
                     child: Container(
                       color: Colors.orange,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              color: Colors.orange,
-                              child: Center(
-                                child: Text('教师列表'),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Container(
-                              color: Colors.tealAccent,
-                              child: Center(
-                                child: Text('互动区域'),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
+                      child: _interactiveViewBuilder(),
                     ),
                   )
                 ],
@@ -66,12 +40,54 @@ class WorkspaceView extends StatelessWidget {
           Container(
             height: 40,
             color: Colors.blueAccent,
-            child: Center(
-              child: Text('工具栏')
-            ),
+            child: _toolsBarBuilder(),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _statusBarBuilder() {
+    return Center(
+      child: Text('状态栏/通知栏')
+    );
+  }
+
+  Widget _toolsBarBuilder() {
+    return Center(
+      child: Text('工具栏')
+    );
+  }
+
+  Widget _mainViewBuilder() {
+    return Center(
+      child: Text('教学内容提纲/PPT')
+    );
+  }
+
+  Widget _interactiveViewBuilder() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 1,
+          child: Container(
+            color: Colors.orange,
+            child: Center(
+              child: Text('教师列表'),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 2,
+          child: Container(
+            color: Colors.tealAccent,
+            child: Center(
+              child: Text('互动区域'),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
