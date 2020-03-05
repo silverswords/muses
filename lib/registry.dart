@@ -12,8 +12,18 @@ void _setupMarkdownView() {
   );
 }
 
+void _setupObservableView() {
+  ui.platformViewRegistry.registerViewFactory('observable-view', (int viewId) => DivElement()
+    ..id = 'observable-view'
+    ..style.border = 'none'
+    ..style.width = '100%'
+    ..style.height = '100%'
+  );
+}
+
 void setupPlatformView() {
   _setupMarkdownView();
+  _setupObservableView();
   setMarkdownContent();
 }
 

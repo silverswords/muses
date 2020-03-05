@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:muses/js/custom.dart';
+
 class WorkspaceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -60,8 +62,9 @@ class WorkspaceView extends StatelessWidget {
   }
 
   Widget _mainViewBuilder() {
+    callRenderObservable();
     return Center(
-      child: Text('教学内容提纲/PPT')
+      child: HtmlElementView(viewType: 'observable-view'),
     );
   }
 

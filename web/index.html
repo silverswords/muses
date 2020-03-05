@@ -25,6 +25,41 @@
       });
     }
   </script>
+  <script type='module'>
+    import { Runtime, Inspector } from 'https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js';
+    import notebook from 'https://api.observablehq.com/@jashkenas/my-neat-notebook.js?v=3';
+
+    window.renderObservable = function() {
+      let target = undefined;
+
+      const platformViews = document.querySelectorAll('flt-platform-view')
+
+      for (let i = 0; i < platformViews.length; i++) {
+        const pView = platformViews[i];
+        const shadow = pView.shadowRoot;
+
+        if (shadow == undefined) {
+          continue
+        }
+
+        for(let i = 0; i < shadow.childNodes.length; i++) {
+          console.log(i + '  ' + shadow.childNodes[i].id)
+          if (shadow.childNodes[i].id == 'observable-view') {
+            target = shadow.childNodes[i];
+            break;
+          }
+        }
+
+        if (target != undefined) {
+          break;
+        }
+      }
+
+      if (target) {
+        new Runtime().module(notebook, Inspector.into(target));
+      }
+    }
+  </script>
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>
