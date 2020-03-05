@@ -23,10 +23,7 @@ class WorkspaceView extends StatelessWidget {
                 children: [
                   Expanded(
                     flex: 3,
-                    child: Container(
-                      color: Colors.grey,
-                      child: _mainViewBuilder(),
-                    ),
+                    child: _mainViewBuilder(),
                   ),
                   Expanded(
                     flex: 1,
@@ -62,9 +59,12 @@ class WorkspaceView extends StatelessWidget {
   }
 
   Widget _mainViewBuilder() {
-    callRenderObservable();
-    return Center(
-      child: HtmlElementView(viewType: 'observable-view'),
+    callRenderObservable('@fengyfei/trigonometric-functions');
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 2),
+      child: HtmlElementView(viewType: 'observable-view'),/*SingleChildScrollView(
+        child: HtmlElementView(viewType: 'observable-view'),
+      ),*/
     );
   }
 

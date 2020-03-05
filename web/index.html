@@ -13,6 +13,7 @@
 
   <title>muses</title>
   <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css" />
 </head>
 <body>
   <!-- This script installs service_worker.js to provide PWA functionality to
@@ -27,9 +28,11 @@
   </script>
   <script type='module'>
     import { Runtime, Inspector } from 'https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js';
-    import notebook from 'https://api.observablehq.com/@jashkenas/my-neat-notebook.js?v=3';
 
-    window.renderObservable = function() {
+    window.renderObservable = async function(path) {
+      const mod = await import(`https://api.observablehq.com/${path}.js?v=3`);
+      const notebook = mod.default;
+
       let target = undefined;
 
       const platformViews = document.querySelectorAll('flt-platform-view')

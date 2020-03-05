@@ -9,8 +9,8 @@ void callMethodDefinedInDart() {
   context.callMethod('callMethodDefinedInDart');
 }
 
-void callRenderObservable() {
+void callRenderObservable(String path) {
   Future.delayed(const Duration(milliseconds: 200), () {
-    context.callMethod('renderObservable');
+    context.callMethod('renderObservable', [path]);
   });
 }
