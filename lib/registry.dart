@@ -20,7 +20,6 @@ void _setupObservableView() {
     ..style.height = '100%'
     ..style.backgroundColor = '#fff'
     ..style.padding = '0 4px 0 4px'
-    ..style.textAlign = 'center'
   );
 }
 

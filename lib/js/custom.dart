@@ -1,16 +1,8 @@
-import 'dart:js';
+@JS()
+library custom;
 
-void callMethodDefinedInDart() {
-  context['funnyWay'] = () {
-    print('method defined in dart executed');
-    return 100;
-  };
+import 'package:js/js.dart';
 
-  context.callMethod('callMethodDefinedInDart');
-}
-
-void callRenderObservable(String path) {
-  Future.delayed(const Duration(milliseconds: 200), () {
-    context.callMethod('renderObservable', [path]);
-  });
-}
+// Calls invoke JavaScript `renderObservable(path)`.
+@JS('renderObservable')
+external void renderObservable(String path);
