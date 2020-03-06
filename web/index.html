@@ -26,43 +26,7 @@
       });
     }
   </script>
-  <script type='module'>
-    import { Runtime, Inspector } from 'https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js';
-
-    window.renderObservable = async function(path) {
-      const mod = await import(`https://notebook-five.now.sh/${path}.js`);
-      const notebook = mod.default;
-
-      let target = undefined;
-
-      const platformViews = document.querySelectorAll('flt-platform-view')
-
-      for (let i = 0; i < platformViews.length; i++) {
-        const pView = platformViews[i];
-        const shadow = pView.shadowRoot;
-
-        if (shadow == undefined) {
-          continue
-        }
-
-        for(let i = 0; i < shadow.childNodes.length; i++) {
-          console.log(i + '  ' + shadow.childNodes[i].id)
-          if (shadow.childNodes[i].id == 'observable-view') {
-            target = shadow.childNodes[i];
-            break;
-          }
-        }
-
-        if (target != undefined) {
-          break;
-        }
-      }
-
-      if (target) {
-        new Runtime().module(notebook, Inspector.into(target));
-      }
-    }
-  </script>
+  <script src="/js/observable.js" type="module"></script>
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>

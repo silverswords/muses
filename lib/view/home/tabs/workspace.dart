@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:muses/js/custom.dart';
+import 'package:muses/widgets/bridge/observable.dart';
 
 class WorkspaceView extends StatelessWidget {
   @override
@@ -59,12 +59,13 @@ class WorkspaceView extends StatelessWidget {
   }
 
   Widget _mainViewBuilder() {
-    renderObservable('@fengyfei/trigonometric-functions');
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 2),
       child: SingleChildScrollView(
-        child: HtmlElementView(viewType: 'observable-view'),
+        child: ObservableNotebook(
+          notebook: '@fengyfei/trigonometric-functions',
+        ),
       ),
     );
   }
