@@ -30,7 +30,7 @@
     import { Runtime, Inspector } from 'https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js';
 
     window.renderObservable = async function(path) {
-      const mod = await import(`https://api.observablehq.com/${path}.js?v=3`);
+      const mod = await import(`https://notebook-five.now.sh/${path}.js`);
       const notebook = mod.default;
 
       let target = undefined;
