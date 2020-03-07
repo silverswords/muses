@@ -53,10 +53,29 @@ class WorkspaceView extends StatelessWidget {
   }
 
   Widget _mainViewBuilder() {
+    const markdown = '''
+      <section data-markdown>
+        <script type="text/template">
+          ## Markdown support
+
+          Write content using inline or external Markdown.
+          Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+
+          ```
+          <section data-markdown>
+            ## Markdown support
+
+            Write content using inline or external Markdown.
+            Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+          </section>
+          ```
+        </script>
+      </section>
+    ''';
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 2),
       // child: ObservableNotebook(notebook: '@fengyfei/trigonometric-functions'),
-      child: RevealPresentation(),
+      child: RevealPresentation(content: markdown),
     );
   }
 }

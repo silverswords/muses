@@ -26,9 +26,4 @@ void _setupObservableView() {
 void setupPlatformView() {
   _setupMarkdownView();
   _setupObservableView();
-  setMarkdownContent();
-}
-
-void setMarkdownContent() {
-  window.localStorage['markdown-view-content'] = 'message from dart';
 }
