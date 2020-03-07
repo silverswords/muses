@@ -14,6 +14,8 @@ class ObservableNotebook extends StatelessWidget {
   Widget build(BuildContext context) {
     renderObservable(this.notebook);
 
-    return HtmlElementView(viewType: 'observable-view');
+    return SingleChildScrollView(
+      child: HtmlElementView(viewType: 'observable-view'),
+    );
   }
 }
