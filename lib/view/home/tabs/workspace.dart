@@ -23,16 +23,9 @@ class WorkspaceView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Expanded(
-                    flex: 3,
+                    flex: 1,
                     child: _mainViewBuilder(),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      color: Colors.orange,
-                      child: _interactiveViewBuilder(),
-                    ),
-                  )
                 ],
               )
             ),
@@ -60,37 +53,10 @@ class WorkspaceView extends StatelessWidget {
   }
 
   Widget _mainViewBuilder() {
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 2),
       // child: ObservableNotebook(notebook: '@fengyfei/trigonometric-functions'),
       child: RevealPresentation(),
-    );
-  }
-
-  Widget _interactiveViewBuilder() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Expanded(
-          flex: 1,
-          child: Container(
-            color: Colors.orange,
-            child: Center(
-              child: Text('教师列表'),
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 2,
-          child: Container(
-            color: Colors.tealAccent,
-            child: Center(
-              child: Text('互动区域'),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
