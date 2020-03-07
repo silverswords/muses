@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:muses/widgets/bridge/observable.dart';
+import 'package:muses/widgets/bridge/reveal.dart';
 
 class WorkspaceView extends StatelessWidget {
   @override
@@ -62,11 +63,8 @@ class WorkspaceView extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 2),
-      child: SingleChildScrollView(
-        child: ObservableNotebook(
-          notebook: '@fengyfei/trigonometric-functions',
-        ),
-      ),
+      // child: ObservableNotebook(notebook: '@fengyfei/trigonometric-functions'),
+      child: RevealPresentation(),
     );
   }
 
