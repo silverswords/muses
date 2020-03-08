@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:muses/constants/dim.dart';
+import 'package:muses/models/workspace.dart';
 
 import './widgets/tab_bar.dart';
 import './widgets/tab_item.dart';
@@ -151,19 +154,33 @@ class _HomePageState extends State<HomePage>
   }
 
   Widget _builderTeacherWindow() {
-    return Positioned(
-      left: tabBarViewWidth,
-      bottom: toolBarHeight,
-      child: TeacherView(),
+    return Consumer<WorkspaceStatus>(
+      builder: (context, status, _) {
+        return Visibility(
+          visible: status.teacherViewVisible,
+          child: Positioned(
+            left: tabBarViewWidth,
+            bottom: toolBarHeight,
+            child: TeacherView(),
+          ),
+        );
+      },
     );
   }
 
   Widget _builderCommunicationWindow() {
-    return Positioned(
-      top: statusBarHeight,
-      right: 0,
-      bottom: toolBarHeight,
-      child: CommunicationView(),
+    return Consumer<WorkspaceStatus>(
+      builder: (context, status, _) {
+        return Visibility(
+          visible: status.communicationViewVisible,
+          child: Positioned(
+            top: statusBarHeight,
+            right: 0,
+            bottom: toolBarHeight,
+            child: CommunicationView(),
+          ),
+        );
+      },
     );
   }
 }
