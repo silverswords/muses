@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './widget/tab_bar.dart';
-import './widget/tab_item.dart';
+import './widgets/tab_bar.dart';
+import './widgets/tab_item.dart';
 
 import './tabs/workspace.dart';
 import './tabs/setting.dart';
