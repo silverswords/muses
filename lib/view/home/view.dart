@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:muses/constants/dim.dart';
 
 import './widgets/tab_bar.dart';
 import './widgets/tab_item.dart';
 
 import './tabs/workspace.dart';
 import './tabs/setting.dart';
+
+import './widgets/teacher.dart';
+import './widgets/communication.dart';
 
 const int tabCount = 2;
 const int turnsToRotateRight = 1;
@@ -17,6 +21,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+  final tabBarViewWidth = 150.0;
   TabController _tabController;
 
   @override
@@ -38,15 +43,30 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    Widget tabBarView;
 
     final verticalRotation = turnsToRotateRight;
-      final revertVerticalRotation = turnsToRotateLeft;
+    final revertVerticalRotation = turnsToRotateLeft;
+
+    Widget tabViews = RotatedBox(
+      quarterTurns: verticalRotation,
+      child: TabBarView(
+        controller: _tabController,
+        children: _buildTabViews().map(
+          (widget) {
+            // Revert the rotation on the tab views.
+            return RotatedBox(
+              quarterTurns: revertVerticalRotation,
+              child: widget,
+            );
+          },
+        ).toList(),
+      ),
+    );
     
-    tabBarView = Row(
+    Widget tabBarView = Row(
       children: [
         Container(
-          width: 150,
+          width: tabBarViewWidth,
           alignment: Alignment.topCenter,
           padding: const EdgeInsets.symmetric(vertical: 32),
           child: Column(
@@ -72,21 +92,7 @@ class _HomePageState extends State<HomePage>
         ),
         Expanded(
           // Rotate the tab views so we can swipe up and down.
-          child: RotatedBox(
-            quarterTurns: verticalRotation,
-            child: TabBarView(
-              controller: _tabController,
-              children: _buildTabViews().map(
-                (widget) {
-                  // Revert the rotation on the tab views.
-                  return RotatedBox(
-                    quarterTurns: revertVerticalRotation,
-                    child: widget,
-                  );
-                },
-              ).toList(),
-            ),
-          ),
+          child: tabViews,
         ),
       ],
     );
@@ -101,7 +107,13 @@ class _HomePageState extends State<HomePage>
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
           ),
-          child: tabBarView,
+          child: Stack(
+            children: [
+              tabBarView,
+              _builderTeacherWindow(),
+              _builderCommunicationWindow(),
+            ],
+          ),
         ),
       ),
     );
@@ -136,5 +148,22 @@ class _HomePageState extends State<HomePage>
       WorkspaceView(),
       SettingView(),
     ];
+  }
+
+  Widget _builderTeacherWindow() {
+    return Positioned(
+      left: tabBarViewWidth,
+      bottom: toolBarHeight,
+      child: TeacherView(),
+    );
+  }
+
+  Widget _builderCommunicationWindow() {
+    return Positioned(
+      top: statusBarHeight,
+      right: 0,
+      bottom: toolBarHeight,
+      child: CommunicationView(),
+    );
   }
 }

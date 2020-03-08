@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:muses/constants/dim.dart';
 import 'package:muses/widgets/bridge/observable.dart';
 import 'package:muses/widgets/bridge/reveal.dart';
 
@@ -11,7 +12,7 @@ class WorkspaceView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            height: 40,
+            height: statusBarHeight,
             color: Colors.purple,
             child: _statusBarBuilder()
           ),
@@ -31,7 +32,7 @@ class WorkspaceView extends StatelessWidget {
             ),
           ),
           Container(
-            height: 40,
+            height: toolBarHeight,
             color: Colors.blueAccent,
             child: _toolsBarBuilder(),
           ),
