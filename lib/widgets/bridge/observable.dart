@@ -12,7 +12,9 @@ class ObservableNotebook extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    renderObservable(this.notebook);
+    Future.delayed(const Duration(milliseconds: 200), () {
+      renderObservable(this.notebook);
+    });
 
     return SingleChildScrollView(
       child: HtmlElementView(viewType: 'observable-view'),
