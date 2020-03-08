@@ -10,8 +10,8 @@ export function findDartElementByID(id) {
     }
 
     for(let i = 0; i < shadow.childNodes.length; i++) {
-      console.log(i + '  ' + shadow.childNodes[i].id)
-      if (shadow.childNodes[i].id == 'observable-view') {
+      console.log(i + '  ' + shadow.childNodes[i].id + ' ' + id)
+      if (shadow.childNodes[i].id == id) {
         return shadow.childNodes[i];
       }
     }
