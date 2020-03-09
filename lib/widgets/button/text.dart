@@ -24,6 +24,7 @@ class TextButton extends StatelessWidget {
           message,
           style: TextStyle(
             fontSize: toolBarTextSize,
+            color: color
           ),
         )
       ),

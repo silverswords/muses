@@ -1,4 +1,4 @@
 const statusBarHeight = 40.0;
-const toolBarHeight = 60.0;
+const toolBarHeight = 36.0;
 
-const toolBarTextSize = 18.0;
+const toolBarTextSize = 12.0;

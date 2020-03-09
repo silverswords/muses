@@ -33,11 +33,7 @@ class WorkspaceView extends StatelessWidget {
               )
             ),
           ),
-          Container(
-            height: toolBarHeight,
-            color: Colors.blueAccent,
-            child: _toolsBarBuilder(),
-          ),
+           _toolsBarBuilder(),
         ],
       ),
     );
@@ -75,8 +71,8 @@ class WorkspaceView extends StatelessWidget {
     ''';
 
     return Container(
-      // child: ObservableNotebook(notebook: '@fengyfei/trigonometric-functions'),
-      child: RevealPresentation(content: markdown),
+      child: ObservableNotebook(notebook: '@fengyfei/trigonometric-functions'),
+      // child: RevealPresentation(content: markdown),
     );
   }
 }
