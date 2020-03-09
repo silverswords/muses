@@ -5,26 +5,14 @@ class WorkspaceStatus extends ChangeNotifier {
   bool _communicationViewVisible = false;
 
   bool get teacherViewVisible => _teacherViewVisible;
-  set teacherViewVisible(bool v) {
-    if (_teacherViewVisible != v) {
-      _teacherViewVisible = v;
-      notifyListeners();
-    }
+  void toggleTeacherViewVisible() {
+    _teacherViewVisible = !_teacherViewVisible;
+    notifyListeners();
   }
 
   bool get communicationViewVisible => _communicationViewVisible;
-  set communicationViewVisible(bool v) {
-    if (_communicationViewVisible != v) {
-      _communicationViewVisible = v;
-      notifyListeners();
-    }
-  }
-
-  void hiddenAll() {
-    if (_teacherViewVisible || _communicationViewVisible) {
-      _teacherViewVisible = false;
-      _communicationViewVisible = false;
-      notifyListeners();
-    }
+  void toggleCommunicationViewVisible() {
+    _communicationViewVisible = !_communicationViewVisible;
+    notifyListeners();
   }
 }

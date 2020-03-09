@@ -4,6 +4,8 @@ import 'package:muses/constants/dim.dart';
 import 'package:muses/widgets/bridge/observable.dart';
 import 'package:muses/widgets/bridge/reveal.dart';
 
+import '../widgets/tools.dart';
+
 class WorkspaceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -48,9 +50,7 @@ class WorkspaceView extends StatelessWidget {
   }
 
   Widget _toolsBarBuilder() {
-    return Center(
-      child: Text('工具栏')
-    );
+    return Toolbar();
   }
 
   Widget _mainViewBuilder() {
