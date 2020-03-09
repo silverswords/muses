@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:muses/js/storage.dart';
+import 'package:muses/js/custom.dart';
 
 class RevealPresentation extends StatelessWidget {
   RevealPresentation({
@@ -12,7 +12,9 @@ class RevealPresentation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setRevealContent(content);
+    Future.delayed(const Duration(milliseconds: 200), () {
+      renderRevealPresentation(content);
+    });
     return HtmlElementView(viewType: 'reveal-presentation-view');
   }
 }

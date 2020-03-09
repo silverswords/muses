@@ -2,12 +2,11 @@ import 'dart:html';
 import 'dart:ui' as ui;
 
 void _setupMarkdownView() {
-  ui.platformViewRegistry.registerViewFactory('reveal-presentation-view', (int viewId) => IFrameElement()
+  ui.platformViewRegistry.registerViewFactory('reveal-presentation-view', (int viewId) => DivElement()
     ..id = 'reveal-presentation-view'
-    ..width = '640'
-    ..height = '360'
-    ..src = '/reveal/index.html'
     ..style.border = 'none'
+    ..style.width = '100%'
+    ..style.height = '100%'
   );
 }
 

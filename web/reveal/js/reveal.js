@@ -426,8 +426,13 @@
 		}
 
 		// Cache references to key DOM elements
-		dom.wrapper = document.querySelector( '.reveal' );
-		dom.slides = document.querySelector( '.reveal .slides' );
+		if (options.container) {
+			dom.wrapper = options.container;
+			dom.slides = options.container.querySelector('.slides');
+		} else {
+			dom.wrapper = document.querySelector( '.reveal' );
+			dom.slides = document.querySelector( '.reveal .slides' );
+		}
 
 		// Force a layout when the whole page, incl fonts, has loaded
 		window.addEventListener( 'load', layout, false );

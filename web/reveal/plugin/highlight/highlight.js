@@ -80,7 +80,8 @@
 			config.highlightOnLoad = typeof config.highlightOnLoad === 'boolean' ? config.highlightOnLoad : true;
 			config.escapeHTML = typeof config.escapeHTML === 'boolean' ? config.escapeHTML : true;
 
-			[].slice.call( document.querySelectorAll( '.reveal pre code' ) ).forEach( function( block ) {
+			const wrapper = Reveal.getRevealElement();
+			[].slice.call( wrapper.querySelectorAll( '.reveal pre code' ) ).forEach( function( block ) {
 
 				// Trim whitespace if the "data-trim" attribute is present
 				if( block.hasAttribute( 'data-trim' ) && typeof block.innerHTML.trim === 'function' ) {

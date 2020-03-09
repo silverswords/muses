@@ -200,8 +200,9 @@
 		return new Promise( function( resolve ) {
 
 			var externalPromises = [];
+			const wrapper = Reveal.getRevealElement();
 
-			[].slice.call( document.querySelectorAll( '[data-markdown]') ).forEach( function( section, i ) {
+			[].slice.call( wrapper.querySelectorAll( '[data-markdown]') ).forEach( function( section, i ) {
 
 				if( section.getAttribute( 'data-markdown' ).length ) {
 
@@ -366,8 +367,8 @@
 	 * DOM to HTML.
 	 */
 	function convertSlides() {
-
-		var sections = document.querySelectorAll( '[data-markdown]:not([data-markdown-parsed])');
+		const wrapper = Reveal.getRevealElement();
+		var sections = wrapper.querySelectorAll( '[data-markdown]:not([data-markdown-parsed])');
 
 		[].slice.call( sections ).forEach( function( section ) {
 
