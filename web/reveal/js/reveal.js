@@ -763,12 +763,12 @@
 		dom.wrapper.setAttribute( 'role', 'application' );
 
 		// There can be multiple instances of controls throughout the page
-		dom.controlsLeft = toArray( document.querySelectorAll( '.navigate-left' ) );
-		dom.controlsRight = toArray( document.querySelectorAll( '.navigate-right' ) );
-		dom.controlsUp = toArray( document.querySelectorAll( '.navigate-up' ) );
-		dom.controlsDown = toArray( document.querySelectorAll( '.navigate-down' ) );
-		dom.controlsPrev = toArray( document.querySelectorAll( '.navigate-prev' ) );
-		dom.controlsNext = toArray( document.querySelectorAll( '.navigate-next' ) );
+		dom.controlsLeft = toArray( dom.wrapper.querySelectorAll( '.navigate-left' ) );
+		dom.controlsRight = toArray( dom.wrapper.querySelectorAll( '.navigate-right' ) );
+		dom.controlsUp = toArray( dom.wrapper.querySelectorAll( '.navigate-up' ) );
+		dom.controlsDown = toArray( dom.wrapper.querySelectorAll( '.navigate-down' ) );
+		dom.controlsPrev = toArray( dom.wrapper.querySelectorAll( '.navigate-prev' ) );
+		dom.controlsNext = toArray( dom.wrapper.querySelectorAll( '.navigate-next' ) );
 
 		// The right and down arrows in the standard reveal.js controls
 		dom.controlsRightArrow = dom.controls.querySelector( '.navigate-right' );
