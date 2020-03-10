@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:muses/constants/dim.dart';
+import 'package:muses/widgets/general/hand_cursor.dart';
 
 class TextButton extends StatelessWidget {
   const TextButton({
@@ -18,15 +19,17 @@ class TextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Text(
-          message,
-          style: TextStyle(
-            fontSize: toolBarTextSize,
-            color: color
-          ),
-        )
+      child: HandCursor(
+        child: GestureDetector(
+          onTap: onTap,
+          child: Text(
+            message,
+            style: TextStyle(
+              fontSize: toolBarTextSize,
+              color: color
+            ),
+          )
+        ),
       ),
     );
   }
