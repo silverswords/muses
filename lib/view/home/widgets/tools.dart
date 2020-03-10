@@ -17,6 +17,7 @@ class Toolbar extends StatelessWidget {
           color: toolbarColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextButton(
                 message: '课堂交流',
@@ -26,6 +27,7 @@ class Toolbar extends StatelessWidget {
                   status.toggleCommunicationViewVisible();
                 },
               ),
+              SizedBox(width: 12),
               TextButton(
                 message: '视频提问',
                 color: status.teacherViewVisible ? toolbarTextFocusColor : Colors.white,
@@ -34,6 +36,7 @@ class Toolbar extends StatelessWidget {
                   status.toggleTeacherViewVisible();
                 },
               ),
+              SizedBox(width: 12),
             ],
           ),
         );

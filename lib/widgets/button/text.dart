@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:muses/constants/colors.dart';
 import 'package:muses/constants/dim.dart';
 import 'package:muses/widgets/general/hand_cursor.dart';
+import 'package:muses/widgets/general/hover_container.dart';
 
 class TextButton extends StatelessWidget {
   const TextButton({
@@ -17,19 +19,24 @@ class TextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: HandCursor(
-        child: GestureDetector(
-          onTap: onTap,
-          child: Text(
-            message,
-            style: TextStyle(
-              fontSize: toolBarTextSize,
-              color: color
+    return HoveredContainer(
+      focused: toolbarTextFocusColor,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+        child: HandCursor(
+          child: GestureDetector(
+            onTap: onTap,
+            child: Center(
+              child: Text(
+                message,
+                style: TextStyle(
+                  fontSize: toolBarTextSize,
+                  color: color
+                ),
+              ),
             ),
-          )
-        ),
+          ),
+          ),
       ),
     );
   }

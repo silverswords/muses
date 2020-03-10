@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:muses/constants/dim.dart';
 import 'package:muses/models/workspace.dart';
 
-import './tabs/workspace.dart';
+import './workspace.dart';
 
 import './widgets/teacher.dart';
 import './widgets/communication.dart';

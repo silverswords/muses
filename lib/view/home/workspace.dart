@@ -4,7 +4,7 @@ import 'package:muses/constants/dim.dart';
 import 'package:muses/widgets/bridge/observable.dart';
 import 'package:muses/widgets/bridge/reveal.dart';
 
-import '../widgets/tools.dart';
+import './widgets/tools.dart';
 
 class WorkspaceView extends StatelessWidget {
   @override
