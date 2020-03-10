@@ -34,7 +34,7 @@ window.renderRevealPresentation = function(content) {
     controls: true,
     progress: true,
     center: true,
-    fragmentInURL: false,
+    hash: false,
     transition: 'slide', // none/fade/slide/convex/concave/zoom
     // More info https://github.com/hakimel/reveal.js#dependencies
     dependencies: [
