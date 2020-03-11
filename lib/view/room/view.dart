@@ -3,6 +3,7 @@ import 'package:flutter/painting.dart';
 
 import 'package:muses/models/room.dart';
 import 'package:muses/routing/names.dart';
+import 'package:muses/widgets/presentation/single_image.dart';
 
 class RoomPage extends StatelessWidget {
   @override
@@ -130,11 +131,8 @@ class RoomPage extends StatelessWidget {
   Widget _buildSchedule() {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-      foregroundDecoration: const BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage('https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_1280.png'),
-          fit: BoxFit.fill,
-        ),
+      child: SingleImagePresentation(
+        url: 'https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_1280.png'
       ),
     );
   }

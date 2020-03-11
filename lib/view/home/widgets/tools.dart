@@ -17,8 +17,10 @@ class Toolbar extends StatelessWidget {
           color: toolbarColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
+            textDirection: TextDirection.rtl,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const SizedBox(width: 12),
               TextButton(
                 message: '课堂交流',
                 color: status.communicationViewVisible ? toolbarTextFocusColor : Colors.white,
@@ -27,7 +29,7 @@ class Toolbar extends StatelessWidget {
                   status.toggleCommunicationViewVisible();
                 },
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               TextButton(
                 message: '视频提问',
                 color: status.teacherViewVisible ? toolbarTextFocusColor : Colors.white,
@@ -36,7 +38,25 @@ class Toolbar extends StatelessWidget {
                   status.toggleTeacherViewVisible();
                 },
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
+              Expanded(
+                flex: 1,
+                child: Container(),
+              ),
+              TextButton(
+                message: '下一页',
+                color: status.teacherViewVisible ? toolbarTextFocusColor : Colors.white,
+                onTap: () {
+                },
+              ),
+              const SizedBox(width: 12),
+              TextButton(
+                message: '上一页',
+                color: status.teacherViewVisible ? toolbarTextFocusColor : Colors.white,
+                onTap: () {
+                },
+              ),
+              const SizedBox(width: 12),
             ],
           ),
         );
