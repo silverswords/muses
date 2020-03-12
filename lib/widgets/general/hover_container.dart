@@ -5,11 +5,13 @@ class HoveredContainer extends StatefulWidget {
     Key key,
     this.normal,
     this.focused,
+    this.disabled,
     this.child
   }) : super(key: key);
 
   final Color normal;
   final Color focused;
+  final bool disabled;
   final Widget child;
 
   @override
@@ -23,7 +25,11 @@ class HoveredContainerState extends State<HoveredContainer> {
   void initState() {
     super.initState();
 
-    background = widget.normal ?? Colors.transparent;
+    if (widget.disabled) {
+      background = Colors.transparent;
+    } else {
+      background = widget.normal ?? Colors.transparent;
+    }
   }
 
   @override
@@ -32,6 +38,10 @@ class HoveredContainerState extends State<HoveredContainer> {
       color: background,
       child: MouseRegion(
         onEnter: (evt) {
+          if (widget.disabled) {
+            return;
+          }
+
           if (widget.focused != null) {
             setState(() {
               background = widget.focused;

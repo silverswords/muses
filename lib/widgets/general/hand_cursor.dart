@@ -6,15 +6,26 @@ class HandCursor extends MouseRegion {
 
   HandCursor({
     Key key,
+    this.disabled,
     Widget child,
   }) : super(
     key: key,
     child: child,
     onHover: (evt) {
+      if (disabled) {
+        return;
+      }
+
       body.style.cursor='pointer';
     },
     onExit: (evt) {
+      if (disabled) {
+        return;
+      }
+
       body.style.cursor='default';
     },
   );
+
+  final bool disabled;
 }

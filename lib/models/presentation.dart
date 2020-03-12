@@ -369,8 +369,9 @@ Reveal.addEventListener( 'customevent', function() {
     return _contents[currentIndex];
   }
 
-  get isFirst => currentIndex == 0;
-  get isLast => currentIndex == (_contents.length - 1);
+  get length => _contents.length;
+  get isFirst => length > 0 && currentIndex == 0;
+  get isLast => length > 0 && currentIndex == (_contents.length - 1);
 
   void forward() {
     if (!isLast) {

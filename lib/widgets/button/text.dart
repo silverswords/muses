@@ -10,20 +10,26 @@ class TextButton extends StatelessWidget {
     Key key,
     @required this.message,
     this.color,
+    this.disabledColor,
     @required this.onTap
   }) : super(key: key);
 
   final String message;
   final Color color;
+  final Color disabledColor;
   final VoidCallback onTap;
+
+  get enabled => color != null;
 
   @override
   Widget build(BuildContext context) {
     return HoveredContainer(
+      disabled: !enabled,
       focused: toolbarTextFocusColor,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 4.0),
         child: HandCursor(
+          disabled: !enabled,
           child: GestureDetector(
             onTap: onTap,
             child: Center(
@@ -31,7 +37,7 @@ class TextButton extends StatelessWidget {
                 message,
                 style: TextStyle(
                   fontSize: toolBarTextSize,
-                  color: color
+                  color: color ?? disabledColor,
                 ),
               ),
             ),
