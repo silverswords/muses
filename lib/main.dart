@@ -7,7 +7,7 @@ import 'package:muses/registry.dart';
 import 'package:muses/routing/names.dart';
 import 'package:muses/view/login/view.dart';
 import 'package:muses/view/room/view.dart';
-import 'package:muses/view/home/view.dart';
+import 'package:muses/view/workspace/view.dart';
 
 void main() {
   setupLocator();
@@ -29,7 +29,7 @@ class Application extends StatelessWidget {
         routes: {
           LoginPageRoute: (context) => LoginPage(),
           RoomPageRoute: (context) => RoomPage(),
-          HomePageRoute: (context) => HomePage(),
+          WorkspacePageRoute: (context) => HomePage(),
         },
       ),
     );

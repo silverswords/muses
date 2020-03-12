@@ -6,7 +6,7 @@ import 'package:muses/widgets/bridge/reveal.dart';
 
 import './widgets/tools.dart';
 
-class WorkspaceView extends StatelessWidget {
+class PresentationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

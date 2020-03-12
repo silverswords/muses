@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:muses/constants/dim.dart';
 import 'package:muses/models/workspace.dart';
 
-import './workspace.dart';
+import './presentation.dart';
 
 import './widgets/teacher.dart';
 import './widgets/communication.dart';
@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
           ),
           child: Stack(
             children: [
-              WorkspaceView(),
+              PresentationView(),
               _builderTeacherWindow(),
               _builderCommunicationWindow(),
             ],

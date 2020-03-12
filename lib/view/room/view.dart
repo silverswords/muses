@@ -19,7 +19,7 @@ class RoomPage extends StatelessWidget {
           child: Container(
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, HomePageRoute);
+                Navigator.pushNamed(context, WorkspacePageRoute);
               },
               child: Row(
                 //mainAxisSize: MainAxisSize.max,
