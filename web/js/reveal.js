@@ -29,6 +29,7 @@ window.renderRevealPresentation = function(content) {
   const slides = container.querySelector('.slides');
   slides.innerHTML = content;
 
+  Reveal.reset();
   Reveal.initialize({
     container: container,
     controls: true,
@@ -40,7 +41,7 @@ window.renderRevealPresentation = function(content) {
     dependencies: [
       // { src: '/reveal/plugin/markdown/marked.js', condition: function() { return !!target.querySelector( '[data-markdown]' ); } },
       // { src: '/reveal/plugin/markdown/markdown.js', condition: function() { return !!target.querySelector( '[data-markdown]' ); } },
-      { src: '/reveal/plugin/highlight/highlight.js', type: 'module' },
+      { src: '/reveal/plugin/highlight/highlight.js' },
       { src: '/reveal/plugin/zoom-js/zoom.js', async: true },
       { src: '/reveal/plugin/notes/notes.js', async: true }
     ]

@@ -390,11 +390,50 @@
 		// Holds custom key code mappings
 		registeredKeyBindings = {};
 
+	function reset() {
+		// Flags if Reveal.initialize() has been called
+		initialized = false;
+
+		// Flags if reveal.js is loaded (has dispatched the 'ready' event)
+		loaded = false;
+
+		// Flags if the overview mode is currently active
+		overview = false;
+
+		// Holds the dimensions of our overview slides, including margins
+		overviewSlideWidth = null;
+		overviewSlideHeight = null;
+
+		// The horizontal and vertical index of the currently active slide
+		indexh = 0;
+		indexv = 0;
+
+		// The previous and current slide HTML elements
+		previousSlide = undefined;
+		currentSlide = undefined;
+
+		previousBackground = undefined;
+
+		// Remember which directions that the user has navigated towards
+		hasNavigatedRight = false,
+		hasNavigatedDown = false,
+
+		// Slides may hold a data-state attribute which we pick up and apply
+		// as a class to the body. This list contains the combined state of
+		// all current slides.
+		state = [];
+
+		// Cached references to DOM elements
+		dom = {};
+
+		// Features supported by the browser, see #checkCapabilities()
+		features = {};
+	}
+
 	/**
 	 * Starts up the presentation if the client is capable.
 	 */
 	function initialize( options ) {
-
 		// Make sure we only initialize once
 		if( initialized === true ) return;
 
@@ -656,7 +695,6 @@
 	 * to the current URL deeplink if there is one.
 	 */
 	function start() {
-
 		loaded = true;
 
 		// Make sure we've got all the DOM elements we need
@@ -2870,7 +2908,6 @@
 	 * @param {number} [o] Origin for use in multimaster environments
 	 */
 	function slide( h, v, f, o ) {
-
 		// Remember where we were at before
 		previousSlide = currentSlide;
 
@@ -4357,7 +4394,6 @@
 	function readURL() {
 
 		var hash = window.location.hash;
-
 		// Attempt to parse the hash as either an index or name
 		var bits = hash.slice( 2 ).split( '/' ),
 			name = hash.replace( /#|\//gi, '' );
@@ -4406,6 +4442,8 @@
 
 			if( h !== indexh || v !== indexv || f !== undefined ) {
 				slide( h, v, f );
+			} else {
+				slide( 0, 0);
 			}
 		}
 
@@ -5965,6 +6003,7 @@
 		VERSION: VERSION,
 
 		initialize: initialize,
+		reset: reset,
 		configure: configure,
 
 		sync: sync,
