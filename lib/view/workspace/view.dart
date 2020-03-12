@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
           ),
           child: Stack(
             children: [
-              PresentationView(),
+              PresentationContainer(),
               _builderTeacherWindow(),
               _builderCommunicationWindow(),
             ],

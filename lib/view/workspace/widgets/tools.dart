@@ -6,6 +6,7 @@ import 'package:muses/constants/dim.dart';
 
 import 'package:muses/widgets/button/text.dart';
 import 'package:muses/models/workspace.dart';
+import 'package:muses/models/presentation.dart';
 
 class Toolbar extends StatelessWidget {
   @override
@@ -47,6 +48,8 @@ class Toolbar extends StatelessWidget {
                 message: '下一页',
                 color: status.teacherViewVisible ? toolbarTextFocusColor : Colors.white,
                 onTap: () {
+                  final presentation = Provider.of<Presentation>(context, listen: false);
+                  presentation.forward();
                 },
               ),
               const SizedBox(width: 12),
@@ -54,6 +57,8 @@ class Toolbar extends StatelessWidget {
                 message: '上一页',
                 color: status.teacherViewVisible ? toolbarTextFocusColor : Colors.white,
                 onTap: () {
+                  final presentation = Provider.of<Presentation>(context, listen: false);
+                  presentation.back();
                 },
               ),
               const SizedBox(width: 12),
