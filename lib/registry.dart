@@ -4,6 +4,8 @@
 import 'dart:html';
 import 'dart:ui' as ui;
 
+import 'package:muses/constants/elements.dart';
+
 void _setupMarkdownView() {
   ui.platformViewRegistry.registerViewFactory('reveal-presentation-view', (int viewId) => DivElement()
     ..id = 'reveal-presentation-view'
@@ -25,7 +27,16 @@ void _setupObservableView() {
   );
 }
 
+void _registerScreeCaptureVideoView() {
+  ui.platformViewRegistry.registerViewFactory('screen-capture-video', (int viewId) => screenCaptureVideo);
+}
+
+void registerScreenCaptureCanvasView(CanvasElement canvas) {
+  ui.platformViewRegistry.registerViewFactory('screen-capture-canvas', (int viewId) => canvas);
+}
+
 void setupPlatformView() {
   _setupMarkdownView();
   _setupObservableView();
+  _registerScreeCaptureVideoView();
 }
