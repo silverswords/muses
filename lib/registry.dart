@@ -1,3 +1,6 @@
+// ignore_for_file: avoid_web_libraries_in_flutter
+// ignore_for_file: undefined_prefixed_name
+
 import 'dart:html';
 import 'dart:ui' as ui;
 
