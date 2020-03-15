@@ -3,7 +3,7 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 
 import 'package:muses/constants/elements.dart';
-import 'package:muses/utility/media/screen_capture.dart';
+import 'package:muses/utility/media/video.dart';
 
 class ScreenShareView extends StatelessWidget {
   @override
