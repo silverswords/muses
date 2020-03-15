@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:muses/constants/elements.dart';
 import 'package:muses/utility/media/screen_capture.dart';
 
-class CommunicationView extends StatelessWidget {
+class ScreenShareView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
