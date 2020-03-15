@@ -3,7 +3,7 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:muses/utility/media/video.dart';
 
-class ScreenCaptureView extends StatelessWidget {
+class WebCameraCaptureView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,7 +11,7 @@ class ScreenCaptureView extends StatelessWidget {
       height: 600,
       color: Color.fromRGBO(127, 255, 255, 0.7),
       child: FutureBuilder<dynamic>(
-        future: captureScreenShot(),
+        future: captureWebCamera(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           dynamic image = snapshot.data;
           if (image == null) {

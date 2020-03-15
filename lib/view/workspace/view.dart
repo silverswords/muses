@@ -7,7 +7,6 @@ import 'package:muses/models/workspace.dart';
 import './presentation.dart';
 
 import './widgets/teacher.dart';
-// import './widgets/screen_share.dart';
 import './widgets/screen_capture.dart';
 
 class HomePage extends StatelessWidget {
@@ -61,7 +60,7 @@ class HomePage extends StatelessWidget {
             top: statusBarHeight,
             right: 0,
             bottom: toolBarHeight,
-            child:  ScreenCaptureView(),// ScreenShareView(),
+            child:  ScreenCaptureView(),
           ),
         );
       },

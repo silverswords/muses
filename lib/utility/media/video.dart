@@ -17,11 +17,8 @@ dynamic blobToUint8List(Blob blob) async {
 @JS('captureScreen')
 external dynamic captureScreen();
 
-Future<Blob> captureScreenShot() async {
-  // MediaStream stream = await promiseToFuture(captureScreen());
-  MediaStream stream = await window.navigator.getUserMedia(video: true);
-
-  print('stream object fetched $stream');
+Future<dynamic> captureScreenShot() async {
+  MediaStream stream = await promiseToFuture(captureScreen());
 
   if (stream == null) {
     return null;
@@ -32,23 +29,40 @@ Future<Blob> captureScreenShot() async {
     return null;
   }
 
-  var track = tracks[0];
-  ImageCapture capture = ImageCapture(track);
-  PhotoCapabilities cap = await capture.getPhotoCapabilities();
-  if (cap != null) {
-    print('takePhoto start ${cap.imageWidth.min} - ${cap.imageWidth.step} - ${cap.imageWidth.max}');
-  }
-  
-  var image = await capture.takePhoto();
-
-  print('takePhoto ${image.runtimeType}');
-
-  if (image == null) {
+  if (tracks.length == 0) {
     return null;
   }
 
+  final video = VideoElement()
+    ..srcObject = stream
+    ..controls = true
+    ..autoplay = true;
+
+  window.document.querySelector('#magic').append(video);
+
+  var track = video.srcObject.getVideoTracks()[0];
+  ImageCapture capture = ImageCapture(track);
+  ImageBitmap image = await capture.grabFrame();
+
+  await Future.delayed(const Duration(milliseconds: 400));
+
+  final CanvasElement canvas = CanvasElement(width: video.videoWidth, height: video.videoHeight);
+  window.document.querySelector('#magic').append(canvas);
+
+  ImageBitmapRenderingContext context = canvas.getContext('bitmaprenderer');
+  context.transferFromImageBitmap(image);
+
   stopStream(stream);
-  return image;
+
+  video.srcObject = null;
+  video.remove();
+
+  final blob = await canvas.toBlob('image/png');
+  ByteBuffer data = await blobToUint8List(blob);
+
+  canvas.remove();
+
+  return data.asUint8List();
 }
 
 Future<dynamic> captureWebCamera() async {
@@ -80,7 +94,7 @@ Future<dynamic> captureWebCamera() async {
   return data.asUint8List();
 }
 
-Future<MediaStream> captureScreenImage() async {
+Future<MediaStream> captureScreenStream() async {
   MediaStream stream = await promiseToFuture(captureScreen());
 
   if (stream == null) {
@@ -88,26 +102,6 @@ Future<MediaStream> captureScreenImage() async {
   }
 
   return stream;
-/*
-  var tracks = stream.getVideoTracks();
-  if (tracks.length == 0) {
-    return null;
-  }
-
-  var track = tracks[0];
-  ImageCapture capture = ImageCapture(track);
-  print('takePhoto start');
-  var image = await capture.takePhoto();
-
-  print('takePhoto ${image.runtimeType}');
-
-  if (image == null) {
-    return null;
-  }
-
-  stopStream(stream);
-  return image;
-  */
 }
 
 void stopStream(MediaStream stream) {

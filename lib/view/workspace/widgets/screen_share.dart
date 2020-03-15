@@ -13,7 +13,7 @@ class ScreenShareView extends StatelessWidget {
       height: 600,
       color: Color.fromRGBO(127, 255, 255, 0.7),
       child: FutureBuilder<MediaStream>(
-        future: captureScreenImage(),
+        future: captureScreenStream(),
         builder: (BuildContext context, AsyncSnapshot<MediaStream> snapshot) {
           MediaStream stream = snapshot.data;
           if (stream == null) {
