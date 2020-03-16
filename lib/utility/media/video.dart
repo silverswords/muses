@@ -1,24 +1,27 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
-@JS()
-library custom;
-
-import 'dart:html';
+import 'dart:html' as html;
 import 'dart:typed_data';
-import 'package:js/js.dart';
-import 'package:js/js_util.dart';
+import 'package:js/js_util.dart' as jsUtil;
 
-@JS('blobArrayBuffer')
-external dynamic blobArrayBuffer(Blob blob);
-
-dynamic blobToUint8List(Blob blob) async {
-  return await promiseToFuture(blobArrayBuffer(blob));
+dynamic blobArrayBuffer(html.Blob blob) {
+  return jsUtil.callMethod(blob, 'arrayBuffer', []);
 }
 
-@JS('captureScreen')
-external dynamic captureScreen();
+dynamic blobToUint8List(html.Blob blob) async {
+  return await jsUtil.promiseToFuture(blobArrayBuffer(blob));
+}
+
+dynamic captureScreen() {
+  return jsUtil.callMethod(html.window.navigator.mediaDevices, 'getDisplayMedia', [{
+    'video': {
+      'cursor': 'always',
+    },
+    'audio': false,
+  }]);
+}
 
 Future<dynamic> captureScreenShot() async {
-  MediaStream stream = await promiseToFuture(captureScreen());
+  html.MediaStream stream = await jsUtil.promiseToFuture<html.MediaStream>(captureScreen());
 
   if (stream == null) {
     return null;
@@ -33,23 +36,23 @@ Future<dynamic> captureScreenShot() async {
     return null;
   }
 
-  final video = VideoElement()
+  final video = html.VideoElement()
     ..srcObject = stream
     ..controls = true
     ..autoplay = true;
 
-  window.document.querySelector('#magic').append(video);
+  html.window.document.querySelector('#magic').append(video);
 
   var track = video.srcObject.getVideoTracks()[0];
-  ImageCapture capture = ImageCapture(track);
-  ImageBitmap image = await capture.grabFrame();
+  html.ImageCapture capture = html.ImageCapture(track);
+  html.ImageBitmap image = await capture.grabFrame();
 
   await Future.delayed(const Duration(milliseconds: 400));
 
-  final CanvasElement canvas = CanvasElement(width: video.videoWidth, height: video.videoHeight);
-  window.document.querySelector('#magic').append(canvas);
+  final html.CanvasElement canvas = html.CanvasElement(width: video.videoWidth, height: video.videoHeight);
+  html.window.document.querySelector('#magic').append(canvas);
 
-  ImageBitmapRenderingContext context = canvas.getContext('bitmaprenderer');
+  html.ImageBitmapRenderingContext context = canvas.getContext('bitmaprenderer');
   context.transferFromImageBitmap(image);
 
   stopStream(stream);
@@ -66,7 +69,7 @@ Future<dynamic> captureScreenShot() async {
 }
 
 Future<dynamic> captureWebCamera() async {
-  MediaStream stream = await window.navigator.getUserMedia(video: true);
+  html.MediaStream stream = await html.window.navigator.getUserMedia(video: true);
 
   if (stream == null) {
     return null;
@@ -78,11 +81,11 @@ Future<dynamic> captureWebCamera() async {
   }
 
   var track = tracks[0];
-  ImageCapture capture = ImageCapture(track);
+  html.ImageCapture capture = html.ImageCapture(track);
 
   await Future.delayed(const Duration(seconds: 1));
   
-  Blob image = await capture.takePhoto();
+  html.Blob image = await capture.takePhoto();
 
   if (image == null) {
     return null;
@@ -94,8 +97,8 @@ Future<dynamic> captureWebCamera() async {
   return data.asUint8List();
 }
 
-Future<MediaStream> captureScreenStream() async {
-  MediaStream stream = await promiseToFuture(captureScreen());
+Future<html.MediaStream> captureScreenStream() async {
+  html.MediaStream stream = await jsUtil.promiseToFuture(captureScreen());
 
   if (stream == null) {
     return null;
@@ -104,7 +107,7 @@ Future<MediaStream> captureScreenStream() async {
   return stream;
 }
 
-void stopStream(MediaStream stream) {
+void stopStream(html.MediaStream stream) {
   stream.getTracks().forEach((element) {
     element.stop();
   });
