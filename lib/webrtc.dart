@@ -53,10 +53,6 @@ void onWebSocketMessage(html.MessageEvent event) async {
     case 'candidate':
       dynamic candidate = message['candidate'];
 
-      if (candidate == null) {
-        sendCandidates(pc.candidates);
-      }
-
       print('[onWebSocketMessage] Candidate($candidate}) - ${candidate.runtimeType}');
       void succeed() {
         print('[addIceCandidate] succeed');
@@ -67,6 +63,8 @@ void onWebSocketMessage(html.MessageEvent event) async {
       }
 
       await pc.addIceCandidate(html.RtcIceCandidate(candidate), succeed, failed);
+
+      sendCandidates(pc.candidates);
       break;
 
     default:
@@ -104,12 +102,17 @@ bool sendOffer(html.RtcSessionDescription offer) {
 bool sendCandidates(List candidates) {
   print('[sendCandidates] Counts: ${candidates.length}');
   for (var i = 0; i < candidates.length; i++) {
-    ws.send({
+    bool status = ws.send({
       'type': 'candidate',
       'source': sourcePeer,
       'target': targetPeer,
-      'candidate': candidates[i],
+      'candidate': {
+        'candidate': candidates[i].candidate,
+        'sdpMid': candidates[i].sdpMid,
+        'sdpMLineIndex': candidates[i].sdpMLineIndex,
+      },
     });
+    print('sending candidate: ${candidates[i].candidate} -> $status');
   }
 
   return true;

@@ -71,9 +71,8 @@ class WebRTCConnection {
   _onIceCandidate(html.RtcPeerConnectionIceEvent event) {
     if (event.candidate != null) {
       print('[onIceCandidate]: ${event.runtimeType} - ${event.candidate.candidate}');
+      _candidates.add(event.candidate);
     }
-
-    _candidates.add(event.candidate);
   }
 
   _onAddStream(event) {
