@@ -1,12 +1,13 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
 class WebSocketConnection {
   WebSocketConnection({
     @required this.path,
-    this.onMessage,
+    @required this.onMessage,
   }) {
     _connect();
 
@@ -25,7 +26,7 @@ class WebSocketConnection {
     ws.onOpen.listen((event) {
     });
 
-    ws.onMessage.listen(onMessage ?? (event) {});
+    ws.onMessage.listen(onMessage);
   }
 
   final String path;
@@ -49,7 +50,12 @@ class WebSocketConnection {
     }
 
     try {
-      ws.send(message);
+      if (message is String) {
+        ws.sendString(message);
+      } else {
+        ws.sendString(JsonEncoder().convert(message));
+      }
+
       return true;
     } catch(e) {
       return false;

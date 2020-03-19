@@ -9,9 +9,12 @@ import 'package:muses/view/login/view.dart';
 import 'package:muses/view/room/view.dart';
 import 'package:muses/view/workspace/view.dart';
 
+import './webrtc.dart';
+
 void main() {
   setupLocator();
   setupPlatformView();
+  remoteShare();
   runApp(Application());
 }
 
