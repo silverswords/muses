@@ -9,7 +9,14 @@ class WebRTCConnection {
   }) {
     pc = html.RtcPeerConnection({
       'iceServers': [
-        {'url': 'stun:stun.stunprotocol.org'},
+        {
+          'url': 'turn:numb.viagenie.ca',
+          'credential': 'muazkh',
+          'username': 'webrtc@live.com'
+        },
+        // {'url': 'stun:stun.stunprotocol.org'},
+        // {'url': 'stun:stun.stunprotocol.org:3478'},
+        // {'url': 'stun:stun3.l.google.com:19302'},
       ]
     });
 
@@ -39,7 +46,10 @@ class WebRTCConnection {
   _onNegotiationNeeded(dynamic event) async { 
     print('[onNegotiationNeeded]: ${event.runtimeType} - $signalState creating offer...');
 
-    html.RtcSessionDescription offer = await pc.createOffer();
+    html.RtcSessionDescription offer = await pc.createOffer({
+      'offerToReceiveAudio': false,
+      'offerToReceiveVideo': true,
+    });
 
     if (signalState != 'stable') {
       print('signalState not stable yet, just return');
